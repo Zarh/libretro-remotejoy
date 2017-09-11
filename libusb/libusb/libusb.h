@@ -49,7 +49,7 @@ typedef unsigned __int32  uint32_t;
 #include <time.h>
 #include <limits.h>
 
-#if defined(__linux) || defined(__APPLE__) || defined(__CYGWIN__)
+#if defined(__linux) || defined(__APPLE__) || defined(__CYGWIN__) || defined(__CELLOS_LV2__)
 #include <sys/time.h>
 #endif
 

@@ -1,6 +1,10 @@
 #include <stdint.h>
-#include <string.h>
+#ifndef __CELLOS_LV2__
 #include <signal.h>
+#else
+#define sig_atomic_t int
+#endif
+#include <string.h>
 #include "remotejoy.h"
 #include "thread.h"
 #include "libusb/libusb/libusb.h"

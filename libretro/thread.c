@@ -28,6 +28,10 @@
 #include <time.h>
 #endif
 
+#ifdef __CELLOS_LV2__
+#include <sys/sys_time.h>
+#endif
+
 #ifdef __MACH__
 #include <mach/clock.h>
 #include <mach/mach.h>
@@ -299,6 +303,12 @@ bool scond_wait_timeout(scond_t *cond, slock_t *lock, unsigned timeout_ms)
    mach_port_deallocate(mach_task_self(), cclock);
    now.tv_sec = mts.tv_sec;
    now.tv_nsec = mts.tv_nsec;
+#elif defined(__CELLOS_LV2__)
+	sys_time_sec_t s;
+	sys_time_nsec_t ns;
+	sys_time_get_current_time(&s, &ns);
+	now.tv_sec = s;
+	now.tv_nsec = ns;
 #else
    clock_gettime(CLOCK_REALTIME, &now);
 #endif
